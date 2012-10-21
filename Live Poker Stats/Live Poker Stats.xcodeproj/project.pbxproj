@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1B31EEA116328835006B9886 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B31EEA016328835006B9886 /* UIKit.framework */; };
+		1B31EEA316328835006B9886 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B31EEA216328835006B9886 /* Foundation.framework */; };
+		1B31EEA516328835006B9886 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B31EEA416328835006B9886 /* CoreGraphics.framework */; };
+		1B31EEAB16328835006B9886 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B31EEA916328835006B9886 /* InfoPlist.strings */; };
+		1B31EEAD16328835006B9886 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B31EEAC16328835006B9886 /* main.m */; };
+		1B31EEB116328835006B9886 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B31EEB016328835006B9886 /* AppDelegate.m */; };
+		1B31EEB316328835006B9886 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B31EEB216328835006B9886 /* Default.png */; };
+		1B31EEB516328835006B9886 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B31EEB416328835006B9886 /* Default@2x.png */; };
+		1B31EEB716328835006B9886 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B31EEB616328835006B9886 /* Default-568h@2x.png */; };
+		1B31EEBA16328835006B9886 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B31EEB816328835006B9886 /* MainStoryboard.storyboard */; };
+		1B31EEBD16328835006B9886 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B31EEBC16328835006B9886 /* ViewController.m */; };
+		1BEBF68B16329244001A6996 /* Players.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF68A16329244001A6996 /* Players.m */; };
+		1BEBF69116335181001A6996 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF69016335181001A6996 /* Settings.m */; };
+		1BEBF694163364A9001A6996 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF693163364A9001A6996 /* Session.m */; };
+		1BEBF6971633EF45001A6996 /* PokerPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF6961633EF44001A6996 /* PokerPlayerCell.m */; };
+		1BEBF69D163402D3001A6996 /* tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF699163402D3001A6996 /* tab@2x.png */; };
+		1BEBF69E163402D3001A6996 /* toggle_handleoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF69A163402D3001A6996 /* toggle_handleoff@2x.png */; };
+		1BEBF69F163402D3001A6996 /* toggle_handleon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF69B163402D3001A6996 /* toggle_handleon@2x.png */; };
+		1BEBF6A0163402D3001A6996 /* toggle_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF69C163402D3001A6996 /* toggle_off@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1B31EE9C16328835006B9886 /* Live Poker Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Live Poker Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B31EEA016328835006B9886 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1B31EEA216328835006B9886 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1B31EEA416328835006B9886 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1B31EEA816328835006B9886 /* Live Poker Stats-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Live Poker Stats-Info.plist"; sourceTree = "<group>"; };
+		1B31EEAA16328835006B9886 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1B31EEAC16328835006B9886 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1B31EEAE16328835006B9886 /* Live Poker Stats-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Live Poker Stats-Prefix.pch"; sourceTree = "<group>"; };
+		1B31EEAF16328835006B9886 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1B31EEB016328835006B9886 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1B31EEB216328835006B9886 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1B31EEB416328835006B9886 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1B31EEB616328835006B9886 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		1B31EEB916328835006B9886 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		1B31EEBB16328835006B9886 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1B31EEBC16328835006B9886 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1BEBF68916329244001A6996 /* Players.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Players.h; sourceTree = "<group>"; };
+		1BEBF68A16329244001A6996 /* Players.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Players.m; sourceTree = "<group>"; };
+		1BEBF68F16335181001A6996 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		1BEBF69016335181001A6996 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		1BEBF692163364A9001A6996 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
+		1BEBF693163364A9001A6996 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		1BEBF6951633EF44001A6996 /* PokerPlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerPlayerCell.h; sourceTree = "<group>"; };
+		1BEBF6961633EF44001A6996 /* PokerPlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerPlayerCell.m; sourceTree = "<group>"; };
+		1BEBF699163402D3001A6996 /* tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab@2x.png"; sourceTree = "<group>"; };
+		1BEBF69A163402D3001A6996 /* toggle_handleoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toggle_handleoff@2x.png"; sourceTree = "<group>"; };
+		1BEBF69B163402D3001A6996 /* toggle_handleon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toggle_handleon@2x.png"; sourceTree = "<group>"; };
+		1BEBF69C163402D3001A6996 /* toggle_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toggle_off@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1B31EE9916328835006B9886 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B31EEA116328835006B9886 /* UIKit.framework in Frameworks */,
+				1B31EEA316328835006B9886 /* Foundation.framework in Frameworks */,
+				1B31EEA516328835006B9886 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B31EE9116328835006B9886 = {
+			isa = PBXGroup;
+			children = (
+				1B31EEA616328835006B9886 /* Live Poker Stats */,
+				1B31EE9F16328835006B9886 /* Frameworks */,
+				1B31EE9D16328835006B9886 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1B31EE9D16328835006B9886 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1B31EE9C16328835006B9886 /* Live Poker Stats.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1B31EE9F16328835006B9886 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B31EEA016328835006B9886 /* UIKit.framework */,
+				1B31EEA216328835006B9886 /* Foundation.framework */,
+				1B31EEA416328835006B9886 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1B31EEA616328835006B9886 /* Live Poker Stats */ = {
+			isa = PBXGroup;
+			children = (
+				1B31EEAF16328835006B9886 /* AppDelegate.h */,
+				1B31EEB016328835006B9886 /* AppDelegate.m */,
+				1B31EEB816328835006B9886 /* MainStoryboard.storyboard */,
+				1B31EEBB16328835006B9886 /* ViewController.h */,
+				1B31EEBC16328835006B9886 /* ViewController.m */,
+				1BEBF68916329244001A6996 /* Players.h */,
+				1BEBF68A16329244001A6996 /* Players.m */,
+				1BEBF68F16335181001A6996 /* Settings.h */,
+				1BEBF69016335181001A6996 /* Settings.m */,
+				1BEBF692163364A9001A6996 /* Session.h */,
+				1BEBF693163364A9001A6996 /* Session.m */,
+				1BEBF6951633EF44001A6996 /* PokerPlayerCell.h */,
+				1BEBF6961633EF44001A6996 /* PokerPlayerCell.m */,
+				1BEBF69816340047001A6996 /* Assets */,
+				1B31EEA716328835006B9886 /* Supporting Files */,
+			);
+			path = "Live Poker Stats";
+			sourceTree = "<group>";
+		};
+		1B31EEA716328835006B9886 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1B31EEA816328835006B9886 /* Live Poker Stats-Info.plist */,
+				1B31EEA916328835006B9886 /* InfoPlist.strings */,
+				1B31EEAC16328835006B9886 /* main.m */,
+				1B31EEAE16328835006B9886 /* Live Poker Stats-Prefix.pch */,
+				1B31EEB216328835006B9886 /* Default.png */,
+				1B31EEB416328835006B9886 /* Default@2x.png */,
+				1B31EEB616328835006B9886 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1BEBF69816340047001A6996 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1BEBF699163402D3001A6996 /* tab@2x.png */,
+				1BEBF69A163402D3001A6996 /* toggle_handleoff@2x.png */,
+				1BEBF69B163402D3001A6996 /* toggle_handleon@2x.png */,
+				1BEBF69C163402D3001A6996 /* toggle_off@2x.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1B31EE9B16328835006B9886 /* Live Poker Stats */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B31EEC016328835006B9886 /* Build configuration list for PBXNativeTarget "Live Poker Stats" */;
+			buildPhases = (
+				1B31EE9816328835006B9886 /* Sources */,
+				1B31EE9916328835006B9886 /* Frameworks */,
+				1B31EE9A16328835006B9886 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Live Poker Stats";
+			productName = "Live Poker Stats";
+			productReference = 1B31EE9C16328835006B9886 /* Live Poker Stats.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1B31EE9316328835006B9886 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Hemant Bhonsle and Matthew Hui";
+			};
+			buildConfigurationList = 1B31EE9616328835006B9886 /* Build configuration list for PBXProject "Live Poker Stats" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1B31EE9116328835006B9886;
+			productRefGroup = 1B31EE9D16328835006B9886 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1B31EE9B16328835006B9886 /* Live Poker Stats */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1B31EE9A16328835006B9886 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B31EEAB16328835006B9886 /* InfoPlist.strings in Resources */,
+				1B31EEB316328835006B9886 /* Default.png in Resources */,
+				1B31EEB516328835006B9886 /* Default@2x.png in Resources */,
+				1B31EEB716328835006B9886 /* Default-568h@2x.png in Resources */,
+				1B31EEBA16328835006B9886 /* MainStoryboard.storyboard in Resources */,
+				1BEBF69D163402D3001A6996 /* tab@2x.png in Resources */,
+				1BEBF69E163402D3001A6996 /* toggle_handleoff@2x.png in Resources */,
+				1BEBF69F163402D3001A6996 /* toggle_handleon@2x.png in Resources */,
+				1BEBF6A0163402D3001A6996 /* toggle_off@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1B31EE9816328835006B9886 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B31EEAD16328835006B9886 /* main.m in Sources */,
+				1B31EEB116328835006B9886 /* AppDelegate.m in Sources */,
+				1B31EEBD16328835006B9886 /* ViewController.m in Sources */,
+				1BEBF68B16329244001A6996 /* Players.m in Sources */,
+				1BEBF69116335181001A6996 /* Settings.m in Sources */,
+				1BEBF694163364A9001A6996 /* Session.m in Sources */,
+				1BEBF6971633EF45001A6996 /* PokerPlayerCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1B31EEA916328835006B9886 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B31EEAA16328835006B9886 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1B31EEB816328835006B9886 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B31EEB916328835006B9886 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1B31EEBE16328835006B9886 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1B31EEBF16328835006B9886 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1B31EEC116328835006B9886 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hemant Bhonsle (T2AGF8BXFF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hemant Bhonsle (T2AGF8BXFF)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Live Poker Stats/Live Poker Stats-Prefix.pch";
+				INFOPLIST_FILE = "Live Poker Stats/Live Poker Stats-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6C183D2C-32F0-4269-AA61-573D510A20F1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6C183D2C-32F0-4269-AA61-573D510A20F1";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1B31EEC216328835006B9886 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hemant Bhonsle (T2AGF8BXFF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hemant Bhonsle (T2AGF8BXFF)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Live Poker Stats/Live Poker Stats-Prefix.pch";
+				INFOPLIST_FILE = "Live Poker Stats/Live Poker Stats-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6C183D2C-32F0-4269-AA61-573D510A20F1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6C183D2C-32F0-4269-AA61-573D510A20F1";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B31EE9616328835006B9886 /* Build configuration list for PBXProject "Live Poker Stats" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B31EEBE16328835006B9886 /* Debug */,
+				1B31EEBF16328835006B9886 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B31EEC016328835006B9886 /* Build configuration list for PBXNativeTarget "Live Poker Stats" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B31EEC116328835006B9886 /* Debug */,
+				1B31EEC216328835006B9886 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1B31EE9316328835006B9886 /* Project object */;
+}
