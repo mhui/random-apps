@@ -58,7 +58,7 @@
 {
     if (alertView.tag == 101) {
         if (buttonIndex == 0) {
-            self.listPlayers = [[NSUserDefaults standardUserDefaults]objectForKey:@"listPlayers"];
+            self.listPlayers = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPlayers"]mutableCopy];
             [self.tablePlayers reloadData];
         } else {
             UIAlertView *chooseNumDefaults = [[UIAlertView alloc]initWithTitle:@"    " message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Create Session",nil];
@@ -123,7 +123,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.cellChosen = indexPath.row;
-    self.currentPlayer = [self.listPlayers objectAtIndex:indexPath.row];
+    self.currentPlayer = [[self.listPlayers objectAtIndex:indexPath.row]mutableCopy];
     [[NSUserDefaults standardUserDefaults]setObject:self.currentPlayer forKey:@"currentPlayerChosen"];
     self.playerOptions = [[UIActionSheet alloc]initWithTitle:[self.currentPlayer valueForKey:@"playerName"] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Fold", @"Raise", @"Check/Call", nil];
     [self.playerOptions showFromRect:self.view.bounds inView:self.view animated:YES];
@@ -135,19 +135,28 @@
 {
     NSNumber *numToIncrement = [NSNumber numberWithInt:0];
     if (buttonIndex == 0) {
-        numToIncrement = [self.currentPlayer objectForKey:@"playerFold"];
+        NSLog(@"bug here");
+        numToIncrement = [self.currentPlayer valueForKey:@"playerFold"];
+        NSLog(@"bug here1");
         numToIncrement = [NSNumber numberWithInt:[numToIncrement intValue]+1];
+        NSLog(@"bug here2");
         [self.currentPlayer setValue:numToIncrement forKey:@"playerFold"];
+        NSLog(@"bug here3");
     } else if (buttonIndex == 1) {
-        numToIncrement = [self.currentPlayer objectForKey:@"playerRaise"];
+        numToIncrement = [self.currentPlayer valueForKey:@"playerRaise"];
         numToIncrement = [NSNumber numberWithInt:[numToIncrement intValue]+1];
         [self.currentPlayer setValue:numToIncrement forKey:@"playerRaise"];
     } else if (buttonIndex == 2) {
-        numToIncrement = [self.currentPlayer objectForKey:@"playerCall"];
+        numToIncrement = [self.currentPlayer valueForKey:@"playerCall"];
         numToIncrement = [NSNumber numberWithInt:[numToIncrement intValue]+1];
         [self.currentPlayer setValue:numToIncrement forKey:@"playerCall"];
     }
+    NSLog(@"stop");
     [self.listPlayers replaceObjectAtIndex:self.cellChosen withObject:self.currentPlayer];
+    if (![[[self.listPlayers objectAtIndex:0] valueForKey:@"playerName"]isEqualToString:@"Default Player 1"]) {
+        [[NSUserDefaults standardUserDefaults]setObject:self.listPlayers forKey:@"listPlayers"];
+    }
+    NSLog(@"stop2");
     [self.tablePlayers reloadData];
 }
 

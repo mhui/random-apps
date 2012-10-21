@@ -22,10 +22,6 @@
 		1BEBF69116335181001A6996 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF69016335181001A6996 /* Settings.m */; };
 		1BEBF694163364A9001A6996 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF693163364A9001A6996 /* Session.m */; };
 		1BEBF6971633EF45001A6996 /* PokerPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF6961633EF44001A6996 /* PokerPlayerCell.m */; };
-		1BEBF69D163402D3001A6996 /* tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF699163402D3001A6996 /* tab@2x.png */; };
-		1BEBF69E163402D3001A6996 /* toggle_handleoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF69A163402D3001A6996 /* toggle_handleoff@2x.png */; };
-		1BEBF69F163402D3001A6996 /* toggle_handleon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF69B163402D3001A6996 /* toggle_handleon@2x.png */; };
-		1BEBF6A0163402D3001A6996 /* toggle_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEBF69C163402D3001A6996 /* toggle_off@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,10 +49,6 @@
 		1BEBF693163364A9001A6996 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		1BEBF6951633EF44001A6996 /* PokerPlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerPlayerCell.h; sourceTree = "<group>"; };
 		1BEBF6961633EF44001A6996 /* PokerPlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerPlayerCell.m; sourceTree = "<group>"; };
-		1BEBF699163402D3001A6996 /* tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab@2x.png"; sourceTree = "<group>"; };
-		1BEBF69A163402D3001A6996 /* toggle_handleoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toggle_handleoff@2x.png"; sourceTree = "<group>"; };
-		1BEBF69B163402D3001A6996 /* toggle_handleon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toggle_handleon@2x.png"; sourceTree = "<group>"; };
-		1BEBF69C163402D3001A6996 /* toggle_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toggle_off@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,10 +131,6 @@
 		1BEBF69816340047001A6996 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				1BEBF699163402D3001A6996 /* tab@2x.png */,
-				1BEBF69A163402D3001A6996 /* toggle_handleoff@2x.png */,
-				1BEBF69B163402D3001A6996 /* toggle_handleon@2x.png */,
-				1BEBF69C163402D3001A6996 /* toggle_off@2x.png */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -203,10 +191,6 @@
 				1B31EEB516328835006B9886 /* Default@2x.png in Resources */,
 				1B31EEB716328835006B9886 /* Default-568h@2x.png in Resources */,
 				1B31EEBA16328835006B9886 /* MainStoryboard.storyboard in Resources */,
-				1BEBF69D163402D3001A6996 /* tab@2x.png in Resources */,
-				1BEBF69E163402D3001A6996 /* toggle_handleoff@2x.png in Resources */,
-				1BEBF69F163402D3001A6996 /* toggle_handleon@2x.png in Resources */,
-				1BEBF6A0163402D3001A6996 /* toggle_off@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
