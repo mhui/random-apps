@@ -8,6 +8,7 @@
 
 #import "Players.h"
 #import "PokerPlayerCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface Players ()
 
@@ -132,7 +133,7 @@
     [[NSUserDefaults standardUserDefaults]setObject:thePlayer forKey:@"currentPlayerChosen"];
     self.playerOptions = [[UIActionSheet alloc]initWithTitle:[thePlayer valueForKey:@"playerName"] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View Player", @"Delete Player", nil];
     self.playerOptions.destructiveButtonIndex = 1;
-    [self.playerOptions showFromRect:self.view.bounds inView:self.view animated:YES];
+    [self.playerOptions showFromTabBar:self.tabBarController.tabBar];
 }
 
 #pragma mark - Action sheet delegate
