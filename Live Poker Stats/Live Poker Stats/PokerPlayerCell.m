@@ -19,7 +19,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        [self.name setFont:[UIFont fontWithName:@"MarkerFelt-Wide" size:16]];
     }
     return self;
 }

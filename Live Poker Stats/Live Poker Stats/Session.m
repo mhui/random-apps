@@ -115,6 +115,8 @@
     cell.call.text = [[currentPlayer objectForKey:@"playerCall"]stringValue];
     cell.fold.text = [[currentPlayer objectForKey:@"playerFold"]stringValue];
     cell.raise.text = [[currentPlayer objectForKey:@"playerRaise"]stringValue];
+    [cell.name setFont:[UIFont fontWithName:@"MarkerFelt-Thin" size:16]];
+    cell.name.textColor = [UIColor darkGrayColor];
     return cell;
 }
 

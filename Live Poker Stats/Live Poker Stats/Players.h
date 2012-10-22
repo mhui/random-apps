@@ -17,6 +17,11 @@
 @property (strong, nonatomic) UIAlertView *playerDetails;
 @property (strong,nonatomic) UIActionSheet *playerOptions;
 
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *checkLabel;
+@property (strong, nonatomic) IBOutlet UILabel *raiseLabel;
+@property (strong, nonatomic) IBOutlet UILabel *foldLabel;
+
 -(IBAction)createPlayer:(id)sender;
 
 @end

@@ -22,6 +22,7 @@
 @synthesize createPlayer = _createPlayer;
 @synthesize playerOptions = _playerOptions;
 @synthesize playerDetails = _playerDetails;
+@synthesize nameLabel = _nameLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +37,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    NSLog(@"view did load");
+    //[self.nameLabel setFont:[UIFont fontWithName:@"Desdemona" size:17]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,6 +122,8 @@
     cell.call.text = [[currentPlayer objectForKey:@"playerCall"]stringValue];
     cell.fold.text = [[currentPlayer objectForKey:@"playerFold"]stringValue];
     cell.raise.text = [[currentPlayer objectForKey:@"playerRaise"]stringValue];
+    [cell.name setFont:[UIFont fontWithName:@"MarkerFelt-Thin" size:16]];
+    cell.name.textColor = [UIColor darkGrayColor];
     return cell;
 }
 
