@@ -8,6 +8,7 @@
 
 #import "Players.h"
 #import "PokerPlayerCell.h"
+#import "PokerPlayerDetails.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface Players ()
@@ -20,10 +21,9 @@
 @synthesize listPlayers = _listPlayers;
 @synthesize playerNameTextField = _playerNameTextField;
 @synthesize createPlayer = _createPlayer;
-@synthesize playerOptions = _playerOptions;
 @synthesize playerDetails = _playerDetails;
 @synthesize nameLabel = _nameLabel;
-
+ 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -37,8 +37,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    NSLog(@"view did load");
-    //[self.nameLabel setFont:[UIFont fontWithName:@"Desdemona" size:17]];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,7 +76,6 @@
     self.playerNameTextField.secureTextEntry=NO;
     self.playerNameTextField.borderStyle = UITextBorderStyleRoundedRect;
     [self.createPlayer addSubview:self.playerNameTextField];
-    
     [self.createPlayer show];
     [self.playerNameTextField becomeFirstResponder];
 }
@@ -100,7 +100,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
@@ -124,6 +123,7 @@
     cell.raise.text = [[currentPlayer objectForKey:@"playerRaise"]stringValue];
     [cell.name setFont:[UIFont fontWithName:@"MarkerFelt-Thin" size:16]];
     cell.name.textColor = [UIColor darkGrayColor];
+    cell.shouldIndentWhileEditing = NO;
     return cell;
 }
 
@@ -136,35 +136,58 @@
     
     NSMutableDictionary *thePlayer = [self.listPlayers objectAtIndex:indexPath.row];
     [[NSUserDefaults standardUserDefaults]setObject:thePlayer forKey:@"currentPlayerChosen"];
-    self.playerOptions = [[UIActionSheet alloc]initWithTitle:[thePlayer valueForKey:@"playerName"] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View Player", @"Delete Player", nil];
-    self.playerOptions.destructiveButtonIndex = 1;
-    [self.playerOptions showFromTabBar:self.tabBarController.tabBar];
+    [self viewPlayer];
 }
 
-#pragma mark - Action sheet delegate
-
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (buttonIndex == 0) {
-        [self viewPlayer];
-    } else if (buttonIndex == 1) {
+    return YES;
+}
+
+-(BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"runs");
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSMutableDictionary *thePlayer = [self.listPlayers objectAtIndex:indexPath.row];
+        NSLog(@"entered delete");
+        [[NSUserDefaults standardUserDefaults]setObject:thePlayer forKey:@"currentPlayerChosen"];
+        [self.listPlayers removeObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"currentPlayerChosen"]];
+        [self.tablePlayers deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
         [self deletePlayer];
     }
 }
 
 -(void)viewPlayer
 {
-    NSMutableDictionary *currentPlayer = [[NSUserDefaults standardUserDefaults]objectForKey:@"currentPlayerChosen"];
-    NSString *messageDetails = [NSString stringWithFormat:@" Fold: %i \nRaise: %i \n Check/Call: %i",[[currentPlayer objectForKey:@"playerFold"]integerValue],[[currentPlayer objectForKey:@"playerRaise"]integerValue],[[currentPlayer objectForKey:@"playerCall"]integerValue]];
-    self.playerDetails = [[UIAlertView alloc]initWithTitle:[currentPlayer objectForKey:@"playerName"] message:messageDetails delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-    [self.playerDetails show];
+    PokerPlayerDetails *playerPage = [[PokerPlayerDetails alloc]init];
+    
+    [self.navigationController pushViewController:playerPage animated:YES];
 }
 
 -(void)deletePlayer
 {
     [self.listPlayers removeObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"currentPlayerChosen"]];
     [[NSUserDefaults standardUserDefaults]setObject:self.listPlayers forKey:@"listPlayers"];
-    [self.tablePlayers reloadData];
 }
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate
+{
+    [super setEditing:editing animated:animate];
+    if(editing)
+    {
+        [self.tablePlayers setEditing:YES animated:YES];
+    }
+    else
+    {
+        [self.tablePlayers setEditing:NO animated:YES];
+
+    }
+}
+
 
 @end

@@ -4,6 +4,22 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller - Players-->
+        <scene sceneID="Q3C-pD-V1u">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="z3r-nn-ITU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Players" image="112-group.png" id="1Bq-cW-pHV"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vrc-DB-2ul">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="i7Z-KO-HFI" kind="relationship" relationship="rootViewController" id="QDd-J7-N6B"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ix9-wR-BVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="208" y="-703"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bNQ-Ru-hpa">
             <objects>
@@ -15,9 +31,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="i7Z-KO-HFI" kind="relationship" relationship="viewControllers" id="e5o-he-ADH"/>
-                        <segue destination="lex-Kb-mt9" kind="relationship" relationship="viewControllers" id="L16-lY-kfR"/>
-                        <segue destination="vhi-gh-T45" kind="relationship" relationship="viewControllers" id="ZAE-jR-bpU"/>
+                        <segue destination="z3r-nn-ITU" kind="relationship" relationship="viewControllers" id="vqd-tY-MLz"/>
+                        <segue destination="lex-Kb-mt9" kind="relationship" relationship="viewControllers" id="QWn-xX-T7Y"/>
+                        <segue destination="vhi-gh-T45" kind="relationship" relationship="viewControllers" id="uMj-14-ICo"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7U8-yK-8pm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -29,11 +45,11 @@
             <objects>
                 <viewController id="i7Z-KO-HFI" customClass="Players" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gga-yI-VMv">
-                        <rect key="frame" x="0.0" y="20" width="320" height="411"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="54" sectionHeaderHeight="22" sectionFooterHeight="22" id="wpr-wC-h2G">
-                                <rect key="frame" x="0.0" y="78" width="320" height="333"/>
+                                <rect key="frame" x="0.0" y="34" width="320" height="333"/>
                                 <color key="backgroundColor" red="0.85925542089999996" green="0.85925542089999996" blue="0.85925542089999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayerCell" rowHeight="54" id="OJL-Dd-pZB" customClass="PokerPlayerCell">
@@ -47,7 +63,7 @@
                                                     <rect key="frame" x="0.0" y="-2" width="320" height="56"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dG5-6g-V9D">
-                                                    <rect key="frame" x="20" y="13" width="124" height="21"/>
+                                                    <rect key="frame" x="10" y="15" width="136" height="21"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Name">
                                                             <attributes>
@@ -61,10 +77,10 @@
                                                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="notification.png" id="qpP-4p-SgU">
-                                                    <rect key="frame" x="217" y="10" width="36" height="30"/>
+                                                    <rect key="frame" x="213" y="10" width="36" height="30"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="notification.png" id="d4r-JE-bbI">
-                                                    <rect key="frame" x="162" y="10" width="36" height="30"/>
+                                                    <rect key="frame" x="158" y="10" width="36" height="30"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="notification.png" id="jOw-nw-hfi">
                                                     <rect key="frame" x="272" y="10" width="36" height="30"/>
@@ -76,13 +92,13 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" text="Raise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GBq-W1-JCP">
-                                                    <rect key="frame" x="213" y="14" width="44" height="21"/>
+                                                    <rect key="frame" x="209" y="14" width="44" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Fold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vmu-B4-ocl">
-                                                    <rect key="frame" x="163" y="14" width="34" height="21"/>
+                                                    <rect key="frame" x="159" y="14" width="34" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,7 +120,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RS9-tI-JSn">
-                                <rect key="frame" x="20" y="50" width="128" height="31"/>
+                                <rect key="frame" x="11" y="6" width="128" height="31"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Name">
                                         <attributes>
@@ -118,7 +134,7 @@
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ala-xB-Luj">
-                                <rect key="frame" x="213" y="55" width="44" height="21"/>
+                                <rect key="frame" x="209" y="11" width="44" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Raise">
                                         <attributes>
@@ -132,7 +148,7 @@
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tul-hv-grl">
-                                <rect key="frame" x="163" y="55" width="34" height="21"/>
+                                <rect key="frame" x="159" y="11" width="34" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Fold">
                                         <attributes>
@@ -146,7 +162,7 @@
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RPD-S8-ZUM">
-                                <rect key="frame" x="272" y="55" width="36" height="21"/>
+                                <rect key="frame" x="272" y="11" width="36" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Call">
                                         <attributes>
@@ -160,12 +176,12 @@
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="q6s-Ar-QAc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="-44" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hkL-rA-u0a"/>
                                     <barButtonItem systemItem="add" id="hqA-3V-AC8">
-                                        <color key="tintColor" red="0.87609614160000004" green="0.43995341360000001" blue="0.0018119898229999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.78848453443877553" green="0.39077252796623063" blue="0.0060816709681729879" alpha="1" colorSpace="calibratedRGB"/>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
@@ -173,12 +189,16 @@
                         <color key="backgroundColor" red="0.85925542089999996" green="0.85925542089999996" blue="0.85925542089999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Players" image="112-group.png" id="hOV-E2-dx0"/>
-                    <navigationItem key="navigationItem" id="VKb-I4-2Lj"/>
+                    <navigationItem key="navigationItem" id="VKb-I4-2Lj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZNo-Gg-OLs">
+                            <color key="tintColor" red="0.29137436224489799" green="0.29137436224489799" blue="0.29137436224489799" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="createPlayer:" destination="i7Z-KO-HFI" id="h5h-TP-dXk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="checkLabel" destination="RPD-S8-ZUM" id="90n-A6-zgg"/>
-                        <outlet property="foldLabel" destination="tul-hv-grl" id="AkI-3W-9Qb"/>
                         <outlet property="nameLabel" destination="RS9-tI-JSn" id="QKa-e9-hNa"/>
-                        <outlet property="raiseLabel" destination="ala-xB-Luj" id="24K-Ph-PRE"/>
                         <outlet property="tablePlayers" destination="wpr-wC-h2G" id="eq2-Ck-LLa"/>
                     </connections>
                 </viewController>
@@ -221,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVi-kE-Zhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="843" y="488"/>
+            <point key="canvasLocation" x="719" y="495"/>
         </scene>
         <!--Session - Game-->
         <scene sceneID="y8T-KV-POr">
@@ -246,7 +266,7 @@
                                                     <rect key="frame" x="0.0" y="-2" width="320" height="56"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p4e-wP-RIT">
-                                                    <rect key="frame" x="20" y="13" width="124" height="21"/>
+                                                    <rect key="frame" x="9.5" y="15" width="136" height="21"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Name">
                                                             <attributes>
@@ -260,10 +280,10 @@
                                                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="notification.png" id="xo9-7q-EqX">
-                                                    <rect key="frame" x="217" y="10" width="36" height="30"/>
+                                                    <rect key="frame" x="213" y="10" width="36" height="30"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="notification.png" id="m4J-p5-it8">
-                                                    <rect key="frame" x="162" y="10" width="36" height="30"/>
+                                                    <rect key="frame" x="158" y="10" width="36" height="30"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="notification.png" id="5o4-vO-SP8">
                                                     <rect key="frame" x="272" y="10" width="36" height="30"/>
@@ -275,13 +295,13 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" text="Raise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tuu-eo-aZJ">
-                                                    <rect key="frame" x="213" y="14" width="44" height="21"/>
+                                                    <rect key="frame" x="209" y="14" width="44" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Fold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fn0-ZF-Ykw">
-                                                    <rect key="frame" x="163" y="14" width="34" height="21"/>
+                                                    <rect key="frame" x="159" y="14" width="34" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -303,7 +323,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fov-yz-bny">
-                                <rect key="frame" x="20" y="50" width="128" height="31"/>
+                                <rect key="frame" x="11" y="50" width="128" height="31"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Name">
                                         <attributes>
@@ -374,7 +394,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UNY-5S-7rn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1287" y="-411"/>
+            <point key="canvasLocation" x="1026" y="-117"/>
         </scene>
     </scenes>
     <resources>
@@ -389,10 +409,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/Players.h"/>
             <relationships>
                 <relationship kind="action" name="createPlayer:"/>
-                <relationship kind="outlet" name="checkLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="foldLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="raiseLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="tablePlayers" candidateClass="UITableView"/>
             </relationships>
         </class>

@@ -7,6 +7,7 @@
 //
 
 #import "PokerPlayerCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation PokerPlayerCell
 
@@ -30,5 +31,34 @@
 
     // Configure the view for the selected state
 }
+
+-(void)willTransitionToState:(UITableViewCellStateMask)aState
+{
+    [super willTransitionToState:aState];
+}
+
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    // no indent in edit mode
+    self.contentView.frame = CGRectMake(0,
+                                        self.contentView.frame.origin.y,
+                                        self.contentView.frame.size.width,
+                                        self.contentView.frame.size.height);
+    CGPoint xPoint = CGPointMake(78, 0);
+    CGPoint xPointNext = CGPointMake(103, 0);
+    if (self.editing )
+    {
+        NSLog(@"go forwards");
+        self.contentView.frame = CGRectMake(0, self.contentView.frame.origin.y,self.contentView.frame.size.width + 80,self.contentView.frame.size.height);
+        self.name.center = CGPointMake(xPointNext.x, self.name.center.y);
+    } else {
+        NSLog(@"go back");
+        self.name.center = CGPointMake(xPoint.x, self.name.center.y);
+    }
+}
+
+
 
 @end

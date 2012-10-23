@@ -19,6 +19,8 @@
 		1B31EEBA16328835006B9886 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B31EEB816328835006B9886 /* MainStoryboard.storyboard */; };
 		1B31EEBD16328835006B9886 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B31EEBC16328835006B9886 /* ViewController.m */; };
 		1B47784916352E8F00FEDF53 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B47784816352E8F00FEDF53 /* QuartzCore.framework */; };
+		1BC5034F1636544700D98496 /* PokerPlayerDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC5034D1636544700D98496 /* PokerPlayerDetails.m */; };
+		1BC5035616368E7E00D98496 /* PokerPlayerDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BC5035516368E7D00D98496 /* PokerPlayerDetails.xib */; };
 		1BEBF68B16329244001A6996 /* Players.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF68A16329244001A6996 /* Players.m */; };
 		1BEBF69116335181001A6996 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF69016335181001A6996 /* Settings.m */; };
 		1BEBF694163364A9001A6996 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF693163364A9001A6996 /* Session.m */; };
@@ -197,6 +199,9 @@
 		1B31EEBB16328835006B9886 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1B31EEBC16328835006B9886 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1B47784816352E8F00FEDF53 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1BC5034C1636544700D98496 /* PokerPlayerDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerPlayerDetails.h; sourceTree = "<group>"; };
+		1BC5034D1636544700D98496 /* PokerPlayerDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerPlayerDetails.m; sourceTree = "<group>"; };
+		1BC5035516368E7D00D98496 /* PokerPlayerDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PokerPlayerDetails.xib; path = ../PokerPlayerDetails.xib; sourceTree = "<group>"; };
 		1BEBF68916329244001A6996 /* Players.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Players.h; sourceTree = "<group>"; };
 		1BEBF68A16329244001A6996 /* Players.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Players.m; sourceTree = "<group>"; };
 		1BEBF68F16335181001A6996 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -420,6 +425,9 @@
 				1BEBF693163364A9001A6996 /* Session.m */,
 				1BEBF6951633EF44001A6996 /* PokerPlayerCell.h */,
 				1BEBF6961633EF44001A6996 /* PokerPlayerCell.m */,
+				1BC5034C1636544700D98496 /* PokerPlayerDetails.h */,
+				1BC5034D1636544700D98496 /* PokerPlayerDetails.m */,
+				1BC5035516368E7D00D98496 /* PokerPlayerDetails.xib */,
 				1BEBF9F616352A21001A6996 /* Resources */,
 				1BEBF69816340047001A6996 /* Assets */,
 				1B31EEA716328835006B9886 /* Supporting Files */,
@@ -819,6 +827,7 @@
 				1BEBFB1C16352A24001A6996 /* user-frame@2x.png in Resources */,
 				1BEBFB1D16352A24001A6996 /* user-icon.png in Resources */,
 				1BEBFB1E16352A24001A6996 /* user-icon@2x.png in Resources */,
+				1BC5035616368E7E00D98496 /* PokerPlayerDetails.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +845,7 @@
 				1BEBF69116335181001A6996 /* Settings.m in Sources */,
 				1BEBF694163364A9001A6996 /* Session.m in Sources */,
 				1BEBF6971633EF45001A6996 /* PokerPlayerCell.m in Sources */,
+				1BC5034F1636544700D98496 /* PokerPlayerDetails.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
