@@ -9,6 +9,7 @@
 #import "RemindersViewController.h"
 #import "ADVTheme.h"
 #import "ReminderCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface RemindersViewController ()
 
@@ -17,6 +18,7 @@
 @implementation RemindersViewController
 
 @synthesize groups, subGroups, groupIcons, selectedGroupIcons;
+@synthesize person = _person;
 
 #pragma mark - View lifecycle
 
@@ -30,27 +32,36 @@
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[NSUserDefaults standardUserDefaults]setValue:@"owedView" forKey:@"currentView"];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    if (self.person.view.center.y == 190) {
+        self.person.view.center = CGPointMake(160, 700);
+        [self.person.view removeFromSuperview];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 	   
     [ADVThemeManager customizeTableView:self.tableView];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"buttonPressed" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"doneCreating" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"cancelPerson" object:nil];
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"] != nil) {
-        self.groups = [[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"];
-        self.subGroups = [[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"];
+        self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
+        self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
     } else {
-        self.groups = [NSArray new];
-        self.subGroups = [NSArray new];
+        self.groups = [NSMutableArray new];
+        self.subGroups = [NSMutableArray new];
     }
-    
-    //self.groups =
-    
-    
-    
-    //self.groupIcons = @[@"icon-check", @"icon-list", @"icon-calendar", @"icon-clock"];
-    
-    //self.selectedGroupIcons = @[@"icon-check-selected", @"icon-list-selected", @"icon-calendar-selected", @"icon-clock-selected"];
         
     UIImageView *imgTableFooter = [[UIImageView alloc] initWithImage:[[ADVThemeManager sharedTheme] tableFooterBackground]];
     [self.tableView setTableFooterView:imgTableFooter];
@@ -72,12 +83,33 @@
 
 -(void)reloadTable:(NSNotification *)notification
 {
-    if ([[notification name]isEqualToString:@"buttonPressed"]) {
-        self.groups = [[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"];
-        NSLog(@"set groups");
-        self.subGroups = [[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"];
-        NSLog(@"okay");
+    if ([[notification name]isEqualToString:@"buttonPressed"] && self.person.view.center.y != 190 && [[[NSUserDefaults standardUserDefaults]valueForKey:@"currentView"]isEqualToString:@"owedView"]) {
+        self.person = [[CreatePerson alloc]init];
+        [ADVThemeManager customizeView:self.person.view];
+        self.person.view.center = CGPointMake(160, 700);
+        [self.view addSubview:self.person.view];
+        [self.view bringSubviewToFront:self.person.view];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.person.view.center = CGPointMake(160, 190);
+        }];
+    } else if ([[notification name]isEqualToString:@"doneCreating"]) {
+        self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
+        self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
         [self.tableView reloadData];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.person.view.center = CGPointMake(160, 700);
+        }];
+    } else if ([[notification name]isEqualToString:@"cancelPerson"]) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.person.view.center = CGPointMake(160, 700);
+        }completion:^(BOOL finished) {
+            if (finished) {
+                self.person.nameField.text = @"";
+                self.person.detailsField.text = @"";
+                self.person.moneyField.text = @"";
+            }
+        }];
+        
     }
 }
 
@@ -95,44 +127,25 @@
 }
 
 - (SDGroupCell *)mainTable:(UITableView *)mainTable setItem:(SDGroupCell *)item forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"code for main rows ran");
+{    
     item.itemText.text = [[self.groups objectAtIndex:indexPath.row]valueForKey:@"personName"];
     item.valueLabel.text = [[self.groups objectAtIndex:indexPath.row]valueForKey:@"personPrice"];
-    
+    item.cellTag = indexPath.row;
 //    NSString* unselectedIconName = groupIcons[indexPath.row];
     item.unSelectedIconImage = [UIImage imageNamed:@"icon-clock"];
     
 //    NSString* selectedIconName = selectedGroupIcons[indexPath.row];
     item.selectedIconImage = [UIImage imageNamed:@"icon-clock-selected"];
-    
+        
     return item;
 }
 
-/*
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
- {
- UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
- 
- [cell.layer setShadowColor:[[UIColor grayColor] CGColor]];
- [cell.layer setShadowOffset:CGSizeMake(0, 2)];
- [cell.layer setShadowOpacity:0.5];
- if(indexPath.row == groups.count - 1){
- 
- }
- return cell;
- }
- 
- */
 
 - (SDSubCell *)item:(SDGroupCell *)item setSubItem:(SDSubCell *)subItem forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSIndexPath *pathGroupCell = [self.tableView indexPathForCell:item];
-//    NSArray *data = subGroups[pathGroupCell.row];
-    NSLog(@"code ran");
-    subItem.itemText.text = [[self.subGroups objectAtIndex:indexPath.row]valueForKey:@"personDetail"];
-    NSLog(@"code ran still");
-    subItem.valueLabel.text = [[self.subGroups objectAtIndex:indexPath.row]valueForKey:@"personDate"];
+    NSMutableDictionary *data = [self.groups objectAtIndex:item.cellTag];
+    subItem.itemText.text = [data valueForKey:@"personDetail"];
+    subItem.valueLabel.text = [data valueForKey:@"personDate"];
     return subItem;
 }
 
@@ -185,22 +198,27 @@
 {
     NSMutableArray *list = [[NSMutableArray alloc]init];
     self.groups = list;
+    self.subGroups = list;
     [[NSUserDefaults standardUserDefaults]setObject:list forKey:@"listPeople"];
     [self.tableView reloadData];
 }
 
-//- (void)setEditing:(BOOL)editing animated:(BOOL)animate
-//{
-//    [super setEditing:editing animated:animate];
-//    if(editing)
-//    {
-//        [self.tableView setEditing:YES animated:YES];
-//    }
-//    else
-//    {
-//        [self.tableView setEditing:NO animated:YES];
-//        
-//    }
-//}
+
+/** There is a bug caused if there are two entries in the list that have the same exact name,detail,value,and date because two values are removed from the users list BUT only one cell is deleted. Won't be a problem once date is put in because all dates are unique. */
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSMutableDictionary *thePlayer = [self.groups objectAtIndex:indexPath.row];
+        [[NSUserDefaults standardUserDefaults]setObject:thePlayer forKey:@"currentPlayerChosen"];
+        [self.groups removeObject:thePlayer];
+        [self.subGroups removeObject:thePlayer];
+        [[NSUserDefaults standardUserDefaults]setObject:self.groups forKey:@"listPeople"];
+        self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
+        self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
+    }
+}
 
 @end

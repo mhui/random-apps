@@ -1,15 +1,15 @@
 //
-//  FirstViewController.m
-//  
+//  ProfileViewController.m
+//  Reminders
 //
-//  Created by Valentin Filip on 7/9/12.
+//  Created by Valentin Filip on 8/8/12.
 //  Copyright (c) 2012 AppDesignVault. All rights reserved.
 //
 
 #import "TasksViewController.h"
-#import "DetailViewController.h"
-#import "TaskCell.h"
 #import "ADVTheme.h"
+#import "ReminderCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface TasksViewController ()
 
@@ -17,86 +17,207 @@
 
 @implementation TasksViewController
 
-@synthesize items;
+@synthesize groups, subGroups, groupIcons, selectedGroupIcons;
+@synthesize person = _person;
+
+#pragma mark - View lifecycle
+
+
+- (id) init
+{
+    if (self = [super initWithNibName:@"SDNestedTableView" bundle:nil])
+    {
+        
+    }
+    return self;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[NSUserDefaults standardUserDefaults]setValue:@"oweView" forKey:@"currentView"];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    if (self.person.view.center.y == 190) {
+        self.person.view.center = CGPointMake(160, 700);
+        [self.person.view removeFromSuperview];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
-    [ADVThemeManager customizeTableView:self.tableView];
-    self.tableView.scrollEnabled = YES;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    self.items = @[@{@"title": @"Take dog out"
-                   , @"done": @YES
-                   , @"time": @"12:00"}
-                  , @{@"title": @"Sign new partnership contract"
-                     , @"done": @NO
-                     , @"time": @"23:00"}
-                  , @{@"title": @"Buy present for Brain"
-                     , @"done": @YES
-                     , @"time": @"23:00"}
-                  , @{@"title": @"Meet Joe at 13:00"
-                     , @"done": @YES
-                     , @"time": @"Tomorrow"}
-                  , @{@"title": @"Pay electricity bill"
-                     , @"done": @NO
-                     , @"time": @"18 August 2012"}
-                  , @{@"title": @"Buy a new surf board"
-                     , @"done": @NO
-                     , @"time": @"21 August 2012"}];
+    [ADVThemeManager customizeTableView:self.tableView];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"buttonPressed" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"doneCreating" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"cancelPerson" object:nil];
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"] != nil) {
+        self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+        self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+    } else {
+        self.groups = [NSMutableArray new];
+        self.subGroups = [NSMutableArray new];
+    }
     
     UIImageView *imgTableFooter = [[UIImageView alloc] initWithImage:[[ADVThemeManager sharedTheme] tableFooterBackground]];
     [self.tableView setTableFooterView:imgTableFooter];
     [self.tableView reloadData];
-    
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-    }
 }
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
+- (void)viewDidUnload {
+    self.groups = nil;
+    self.subGroups = nil;
+    self.groupIcons = nil;
+    self.selectedGroupIcons = nil;
+    [super viewDidUnload];
+}
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+-(void)reloadTable:(NSNotification *)notification
+{
+    if ([[notification name]isEqualToString:@"buttonPressed"] && self.person.view.center.y != 190 && [[[NSUserDefaults standardUserDefaults]valueForKey:@"currentView"]isEqualToString:@"oweView"]) {
+        self.person = [[CreatePerson alloc]init];
+        [ADVThemeManager customizeView:self.person.view];
+        self.person.view.center = CGPointMake(160, 700);
+        [self.view addSubview:self.person.view];
+        [self.view bringSubviewToFront:self.person.view];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.person.view.center = CGPointMake(160, 190);
+        }];
+    } else if ([[notification name]isEqualToString:@"doneCreating"]) {
+        self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+        self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+        [self.tableView reloadData];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.person.view.center = CGPointMake(160, 700);
+        }];
+    } else if ([[notification name]isEqualToString:@"cancelPerson"]) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.person.view.center = CGPointMake(160, 700);
+        }completion:^(BOOL finished) {
+            if (finished) {
+                self.person.nameField.text = @"";
+                self.person.detailsField.text = @"";
+                self.person.moneyField.text = @"";
+            }
+        }];
+        
+    }
+}
+
+
+#pragma mark - Nested Tables methods
+
+- (NSInteger)mainTable:(UITableView *)mainTable numberOfItemsInSection:(NSInteger)section
+{
+    return [groups count];
+}
+
+- (NSInteger)mainTable:(UITableView *)mainTable numberOfSubItemsforItem:(SDGroupCell *)item atIndexPath:(NSIndexPath *)indexPath
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.items count];
+- (SDGroupCell *)mainTable:(UITableView *)mainTable setItem:(SDGroupCell *)item forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    item.itemText.text = [[self.groups objectAtIndex:indexPath.row]valueForKey:@"personName"];
+    item.valueLabel.text = [[self.groups objectAtIndex:indexPath.row]valueForKey:@"personPrice"];
+    item.cellTag = indexPath.row;
+    //    NSString* unselectedIconName = groupIcons[indexPath.row];
+    item.unSelectedIconImage = [UIImage imageNamed:@"icon-clock"];
+    
+    //    NSString* selectedIconName = selectedGroupIcons[indexPath.row];
+    item.selectedIconImage = [UIImage imageNamed:@"icon-clock-selected"];
+    
+    return item;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    TaskCell *cell = (TaskCell *)[self.tableView dequeueReusableCellWithIdentifier:@"TaskCell"];
-    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list-item-checkable.png"]];
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    
-    NSDictionary *item = (self.items)[indexPath.row];
-    
-    cell.titleLabel.text = [item valueForKey:@"title"];
-    cell.timeLabel.text = [item valueForKey:@"time"];
-    cell.checkbox.checked = [[item valueForKey:@"done"] boolValue];
-    return cell;
+
+- (SDSubCell *)item:(SDGroupCell *)item setSubItem:(SDSubCell *)subItem forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableDictionary *data = [self.groups objectAtIndex:item.cellTag];
+    subItem.itemText.text = [data valueForKey:@"personDetail"];
+    subItem.valueLabel.text = [data valueForKey:@"personDate"];
+    return subItem;
 }
 
-#pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 47.0f;
+- (void) mainTable:(UITableView *)mainTable itemDidChange:(SDGroupCell *)item
+{
+    SelectableCellState state = item.selectableCellState;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:item];
+    switch (state) {
+        case Checked:
+            NSLog(@"Changed Item at indexPath:%@ to state \"Checked\"", indexPath);
+            break;
+        case Unchecked:
+            NSLog(@"Changed Item at indexPath:%@ to state \"Unchecked\"", indexPath);
+            break;
+        case Halfchecked:
+            NSLog(@"Changed Item at indexPath:%@ to state \"Halfchecked\"", indexPath);
+            break;
+        default:
+            break;
+    }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSDictionary *object = items[indexPath.row];
-        self.detailViewController.detailItem = object;
-    } else {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void) mainItem:(SDGroupCell *)item subItemDidChange: (SDSelectableCell *)subItem forTap:(BOOL)tapped
+{
+    SelectableCellState state = subItem.selectableCellState;
+    NSIndexPath *indexPath = [item.subTable indexPathForCell:subItem];
+    switch (state) {
+        case Checked:
+            NSLog(@"Changed Sub Item at indexPath:%@ to state \"Checked\"", indexPath);
+            break;
+        case Unchecked:
+            NSLog(@"Changed Sub Item at indexPath:%@ to state \"Unchecked\"", indexPath);
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)expandingItem:(SDGroupCell *)item withIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Expanded Item at indexPath: %@", indexPath);
+}
+
+- (void)collapsingItem:(SDGroupCell *)item withIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Collapsed Item at indexPath: %@", indexPath);
+}
+
+-(IBAction)clearTable:(id)sender
+{
+    NSMutableArray *list = [[NSMutableArray alloc]init];
+    self.groups = list;
+    self.subGroups = list;
+    [[NSUserDefaults standardUserDefaults]setObject:list forKey:@"listPeopleNext"];
+    [self.tableView reloadData];
+}
+
+
+/** There is a bug caused if there are two entries in the list that have the same exact name,detail,value,and date because two values are removed from the users list BUT only one cell is deleted. Won't be a problem once date is put in because all dates are unique. */
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSMutableDictionary *thePlayer = [self.groups objectAtIndex:indexPath.row];
+        [[NSUserDefaults standardUserDefaults]setObject:thePlayer forKey:@"currentPlayerChosen"];
+        [self.groups removeObject:thePlayer];
+        [self.subGroups removeObject:thePlayer];
+        [[NSUserDefaults standardUserDefaults]setObject:self.groups forKey:@"listPeopleNext"];
+        self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+        self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
     }
 }
 

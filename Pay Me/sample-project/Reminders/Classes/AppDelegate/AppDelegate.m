@@ -38,7 +38,10 @@ static AppDelegate *sharedDelegate;
         NSMutableArray *list = [[NSMutableArray alloc]init];
         [[NSUserDefaults standardUserDefaults]setObject:list forKey:@"listPeople"];
     }
-    
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"] == nil) {
+        NSMutableArray *list2 = [[NSMutableArray alloc]init];
+        [[NSUserDefaults standardUserDefaults]setObject:list2 forKey:@"listPeopleNext"];
+    }
     return YES;
 }
 

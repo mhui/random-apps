@@ -13,6 +13,7 @@
 @implementation SDGroupCell
 
 @synthesize isExpanded, subTable, subCell, subCellsAmt, selectedSubCellsAmt, selectableSubCellsState, cellIndexPath, iconImageView, selectedImageView, selectedIconImage, unSelectedIconImage;
+@synthesize cellTag = _cellTag;
 
 + (int) getHeight
 {
@@ -291,5 +292,19 @@
 //    }
     [self.parentTable groupCell:self didSelectSubCell:cell withIndexPath:indexPath andWithTap:cellTapped];
 }
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    // no indent in edit mode
+    self.contentView.frame = CGRectMake(0,
+                                        self.contentView.frame.origin.y,
+                                        self.contentView.frame.size.width,
+                                        self.contentView.frame.size.height);
+    self.valueLabel.center = CGPointMake(self.valueLabel.center.x, self.valueLabel.center.y);
+    self.notifImageView.center = CGPointMake(self.notifImageView.center.x, self.notifImageView.center.y);
+}
+
+
 
 @end

@@ -1,20 +1,25 @@
 //
-//  FirstViewController.h
+//  ProfileViewController.h
 //  Reminders
 //
-//  Created by Valentin Filip on 7/9/12.
+//  Created by Valentin Filip on 8/8/12.
 //  Copyright (c) 2012 AppDesignVault. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "SDNestedTableViewController.h"
+#import "CreatePerson.h"
 
-@class DetailViewController;
-
-@interface TasksViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface TasksViewController : SDNestedTableViewController <UINavigationBarDelegate, UITableViewDelegate> {
     NSArray *items;
 }
 
-@property (strong, nonatomic) NSArray *items;
-@property (strong, nonatomic) DetailViewController *detailViewController;
+@property (nonatomic, strong) NSMutableArray* groups;
+@property (nonatomic, strong) NSArray* groupIcons;
+@property (nonatomic, strong) NSArray* selectedGroupIcons;
+@property (nonatomic, strong) NSMutableArray* subGroups;
+@property (nonatomic, strong) CreatePerson* person;
+
+-(IBAction)clearTable:(id)sender;
 
 @end

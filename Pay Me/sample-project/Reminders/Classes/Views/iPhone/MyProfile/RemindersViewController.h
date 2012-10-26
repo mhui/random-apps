@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "SDNestedTableViewController.h"
+#import "CreatePerson.h"
 
-@interface RemindersViewController : SDNestedTableViewController {
+@interface RemindersViewController : SDNestedTableViewController <UINavigationBarDelegate, UITableViewDelegate> {
     NSArray *items;
 }
 
-@property (nonatomic, strong) NSArray* groups;
+@property (nonatomic, strong) NSMutableArray* groups;
 @property (nonatomic, strong) NSArray* groupIcons;
 @property (nonatomic, strong) NSArray* selectedGroupIcons;
-@property (nonatomic, strong) NSArray* subGroups;
+@property (nonatomic, strong) NSMutableArray* subGroups;
+@property (nonatomic, strong) CreatePerson* person;
 
 -(IBAction)clearTable:(id)sender;
 

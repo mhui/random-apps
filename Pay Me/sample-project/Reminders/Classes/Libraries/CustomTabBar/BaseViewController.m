@@ -27,6 +27,7 @@
 
 #import "BaseViewController.h"
 #import "AppDelegate.h"
+#import "CreatePerson.h"
 
 @implementation BaseViewController
 
@@ -44,8 +45,8 @@
     UIImage *highlightImage = [UIImage imageNamed:options[@"highlightImage"]];
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-    UITabBarItem *item = [self.tabBar.items objectAtIndex:2];
-    item.enabled = NO;
+//    UITabBarItem *item = [self.tabBar.items objectAtIndex:2];
+//    item.enabled = NO;
     
     button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
     [button setImage:buttonImage forState:UIControlStateNormal];
@@ -61,17 +62,7 @@
 }
 
 - (void)centerItemTapped {
-    NSLog(@"okay1");
-    NSMutableArray *listPeople = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
-    NSLog(@"%i",[listPeople count]);
-    NSMutableDictionary *testPerson = [[NSMutableDictionary alloc]init];
-    [testPerson setValue:@"Person Name" forKey:@"personName"];
-    [testPerson setValue:@"$" forKey:@"personPrice"];
-    [testPerson setValue:@"Transaction Details" forKey:@"personDetail"];
-    [testPerson setValue:@"Date and Time" forKey:@"personDate"];
-    [listPeople addObject:testPerson];
-    [[NSUserDefaults standardUserDefaults]setObject:listPeople forKey:@"listPeople"];
-    NSLog(@"okay2");
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"buttonPressed" object:nil];
     
 }

@@ -41,6 +41,8 @@ static const int subCellHeight = 46;
 @property (strong) UIImage* selectedIconImage;
 @property (strong) UIImage* unSelectedIconImage;
 
+@property int cellTag;
+
 - (void) setHighlightedLook:(BOOL)highlighted;
 
 - (void) subCellsToggleCheck;

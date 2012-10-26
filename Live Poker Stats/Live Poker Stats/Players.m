@@ -146,7 +146,6 @@
 
 -(BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"runs");
     return NO;
 }
 
@@ -154,7 +153,6 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSMutableDictionary *thePlayer = [self.listPlayers objectAtIndex:indexPath.row];
-        NSLog(@"entered delete");
         [[NSUserDefaults standardUserDefaults]setObject:thePlayer forKey:@"currentPlayerChosen"];
         [self.listPlayers removeObject:[[NSUserDefaults standardUserDefaults]objectForKey:@"currentPlayerChosen"]];
         [self.tablePlayers deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
