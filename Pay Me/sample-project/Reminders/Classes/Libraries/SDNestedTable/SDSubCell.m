@@ -10,6 +10,8 @@
 
 @implementation SDSubCell
 
+@synthesize row = _row;
+
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
     if((self = [super initWithCoder:aDecoder]))
@@ -30,21 +32,28 @@
     [super tapTransition];
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    // no indent in edit mode
-    self.contentView.frame = CGRectMake(0,
-                                        self.contentView.frame.origin.y,
-                                        self.contentView.frame.size.width,
-                                        self.contentView.frame.size.height);
-    self.valueLabel.center = CGPointMake(self.valueLabel.center.x, self.valueLabel.center.y);
-    self.notifImageView.center = CGPointMake(self.notifImageView.center.x, self.notifImageView.center.y);
-}
+//- (void)layoutSubviews
+//{
+//    [super layoutSubviews];
+//    // no indent in edit mode
+//    self.contentView.frame = CGRectMake(0,
+//                                        self.contentView.frame.origin.y,
+//                                        self.contentView.frame.size.width,
+//                                        self.contentView.frame.size.height);
+//    self.valueLabel.center = CGPointMake(self.valueLabel.center.x, self.valueLabel.center.y);
+//    self.notifImageView.center = CGPointMake(self.notifImageView.center.x, self.notifImageView.center.y);
+//}
 
 -(IBAction)editCell:(id)sender
 {
-    NSLog(@"edit the person cell");
+    if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"currentView"]isEqualToString:@"owedView"]) {
+        NSMutableDictionary *currentPerson = [[[[NSUserDefaults standardUserDefaults]valueForKey:@"listPeople"]objectAtIndex:self.row]mutableCopy];
+        [[NSUserDefaults standardUserDefaults]setValue:currentPerson forKey:@"currentPlayerChosen"];
+    } else {
+        NSMutableDictionary *currentPerson = [[[[NSUserDefaults standardUserDefaults]valueForKey:@"listPeopleNext"]objectAtIndex:self.row]mutableCopy];
+        [[NSUserDefaults standardUserDefaults]setValue:currentPerson forKey:@"currentPlayerChosen"];
+    }
+    [[NSUserDefaults standardUserDefaults]setInteger:self.row forKey:@"rowToInsert"];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"editPerson" object:nil];
 }
 

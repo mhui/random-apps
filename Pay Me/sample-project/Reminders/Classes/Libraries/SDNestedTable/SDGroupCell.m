@@ -141,10 +141,7 @@
         [self.itemText setShadowOffset:CGSizeMake(0, 1)];
         [iconImageView setImage:unSelectedIconImage];
         [self.valueLabel setTextColor:[UIColor whiteColor]];
-        UIImage *scaledImage =
-        [UIImage imageWithCGImage:[[UIImage imageNamed:@"notification.png"] CGImage]
-                            scale:2.0 orientation:UIImageOrientationUp];
-        [self.notifImageView setImage:scaledImage];
+        [self.notifImageView setImage:[UIImage imageNamed:@"notification.png"]];
     }
 }
 
@@ -300,12 +297,11 @@
 {
     [super layoutSubviews];
     // no indent in edit mode
-    self.contentView.frame = CGRectMake(0,
-                                        self.contentView.frame.origin.y,
-                                        self.contentView.frame.size.width,
+    self.valueLabel.center = CGPointMake(290, self.valueLabel.center.y);
+    self.notifImageView.center = CGPointMake(290, self.notifImageView.center.y);
+    self.contentView.frame = CGRectMake(0,self.contentView.frame.origin.y,460,
                                         self.contentView.frame.size.height);
-    self.valueLabel.center = CGPointMake(self.valueLabel.center.x, self.valueLabel.center.y);
-    self.notifImageView.center = CGPointMake(self.notifImageView.center.x, self.notifImageView.center.y);
+    NSLog(@"YOLO");
 }
 
 

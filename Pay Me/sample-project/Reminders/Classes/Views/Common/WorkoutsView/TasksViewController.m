@@ -149,6 +149,8 @@
 
 - (SDGroupCell *)mainTable:(UITableView *)mainTable setItem:(SDGroupCell *)item forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    item.valueLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+    item.notifImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     item.itemText.text = [[self.groups objectAtIndex:indexPath.row]valueForKey:@"personName"];
     item.valueLabel.text = [[self.groups objectAtIndex:indexPath.row]valueForKey:@"personPrice"];
     item.cellTag = indexPath.row;
@@ -167,6 +169,7 @@
     NSMutableDictionary *data = [self.groups objectAtIndex:item.cellTag];
     subItem.itemText.text = [data valueForKey:@"personDetail"];
     subItem.valueLabel.text = [data valueForKey:@"personDate"];
+    subItem.row = item.cellTag;
     return subItem;
 }
 

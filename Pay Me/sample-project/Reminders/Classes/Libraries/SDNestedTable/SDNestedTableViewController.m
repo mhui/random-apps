@@ -137,19 +137,6 @@
 
 #pragma mark - TableView delegation
 
-//- (void)setEditing:(BOOL)editing animated:(BOOL)animate
-//{
-//    [super setEditing:editing animated:animate];
-//    if(editing)
-//    {
-//        [self.tableView setEditing:YES animated:YES];
-//    }
-//    else
-//    {
-//        [self.tableView setEditing:NO animated:YES];
-//        
-//    }
-//}
 //
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 //    
@@ -228,6 +215,12 @@
     
     return cell;
 }
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

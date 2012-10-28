@@ -148,7 +148,9 @@
 }
 
 - (SDGroupCell *)mainTable:(UITableView *)mainTable setItem:(SDGroupCell *)item forRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
+    item.valueLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+    item.notifImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
     item.itemText.text = [[self.groups objectAtIndex:indexPath.row]valueForKey:@"personName"];
     item.valueLabel.text = [[self.groups objectAtIndex:indexPath.row]valueForKey:@"personPrice"];
     item.cellTag = indexPath.row;
@@ -167,6 +169,7 @@
     NSMutableDictionary *data = [self.groups objectAtIndex:item.cellTag];
     subItem.itemText.text = [data valueForKey:@"personDetail"];
     subItem.valueLabel.text = [data valueForKey:@"personDate"];
+    subItem.row = item.cellTag;
     return subItem;
 }
 
@@ -226,9 +229,6 @@
     [[NSUserDefaults standardUserDefaults]setObject:list forKey:@"listPeople"];
     [self.tableView reloadData];
 }
-
-
-/** There is a bug caused if there are two entries in the list that have the same exact name,detail,value,and date because two values are removed from the users list BUT only one cell is deleted. Won't be a problem once date is put in because all dates are unique. */
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     

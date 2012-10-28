@@ -11,6 +11,8 @@
 
 @interface SDSubCell : SDSelectableCell
 
+@property (nonatomic) int row;
+
 -(IBAction)editCell:(id)sender;
 
 @end
