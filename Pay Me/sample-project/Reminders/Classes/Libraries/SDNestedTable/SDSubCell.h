@@ -11,4 +11,6 @@
 
 @interface SDSubCell : SDSelectableCell
 
+-(IBAction)editCell:(id)sender;
+
 @end

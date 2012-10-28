@@ -63,6 +63,7 @@
 
 - (void)centerItemTapped {
 
+    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"inEditMode"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"buttonPressed" object:nil];
     
 }

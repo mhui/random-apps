@@ -15,7 +15,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *detailsField;
 
 -(IBAction)createPerson:(id)sender;
-//-(IBAction)createPerson2:(id)sender;
 -(IBAction)cancelPerson:(id)sender;
 
 @end

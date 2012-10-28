@@ -38,6 +38,15 @@
     [[NSUserDefaults standardUserDefaults]setValue:@"oweView" forKey:@"currentView"];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.person.view.center.y == 190) {
+        self.person.view.center = CGPointMake(160, 700);
+        [self.person.view removeFromSuperview];
+    }
+}
+
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -55,6 +64,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"buttonPressed" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"doneCreating" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"cancelPerson" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"editPerson" object:nil];
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"] != nil) {
         self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
         self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
@@ -104,12 +114,23 @@
             self.person.view.center = CGPointMake(160, 700);
         }completion:^(BOOL finished) {
             if (finished) {
-                self.person.nameField.text = @"";
-                self.person.detailsField.text = @"";
-                self.person.moneyField.text = @"";
+                [self.person.view removeFromSuperview];
             }
         }];
-        
+    } else if ([[notification name]isEqualToString:@"editPerson"]) {
+        NSMutableDictionary *stats = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentPlayerChosen"];
+        self.person = [[CreatePerson alloc]init];
+        [ADVThemeManager customizeView:self.person.view];
+        self.person.view.center = CGPointMake(160, 700);
+        self.person.nameField.text = [stats valueForKey:@"personName"];
+        self.person.detailsField.text = [stats valueForKey:@"personDetail"];
+        self.person.moneyField.text = [stats valueForKey:@"personPrice"];
+        [self.view addSubview:self.person.view];
+        [self.view bringSubviewToFront:self.person.view];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.person.view.center = CGPointMake(160, 190);
+        }];
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"inEditMode"];
     }
 }
 
@@ -187,6 +208,9 @@
 - (void)expandingItem:(SDGroupCell *)item withIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Expanded Item at indexPath: %@", indexPath);
+    NSMutableDictionary *currentPlayer = [self.groups objectAtIndex:indexPath.row];
+    [[NSUserDefaults standardUserDefaults]setInteger:indexPath.row forKey:@"rowToInsert"];
+    [[NSUserDefaults standardUserDefaults]setValue:currentPlayer forKey:@"currentPlayerChosen"];
 }
 
 - (void)collapsingItem:(SDGroupCell *)item withIndexPath:(NSIndexPath *)indexPath
@@ -216,8 +240,13 @@
         [[NSUserDefaults standardUserDefaults]setObject:self.groups forKey:@"listPeopleNext"];
         self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
         self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
+        [UIView animateWithDuration:3.0 animations:^{
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationMiddle];
+        }completion:^(BOOL finished){
+            if (finished) {
+                [self.tableView reloadData];
+            }
+        }];
     }
 }
 

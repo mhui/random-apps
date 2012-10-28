@@ -38,6 +38,15 @@
     [[NSUserDefaults standardUserDefaults]setValue:@"owedView" forKey:@"currentView"];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.person.view.center.y == 190) {
+        self.person.view.center = CGPointMake(160, 700);
+        [self.person.view removeFromSuperview];
+    }
+}
+
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -55,6 +64,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"buttonPressed" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"doneCreating" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"cancelPerson" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(reloadTable:) name:@"editPerson" object:nil];
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"] != nil) {
         self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
         self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
@@ -104,12 +114,23 @@
             self.person.view.center = CGPointMake(160, 700);
         }completion:^(BOOL finished) {
             if (finished) {
-                self.person.nameField.text = @"";
-                self.person.detailsField.text = @"";
-                self.person.moneyField.text = @"";
+                [self.person.view removeFromSuperview];
             }
         }];
-        
+    } else if ([[notification name]isEqualToString:@"editPerson"]) {
+        NSMutableDictionary *stats = [[NSUserDefaults standardUserDefaults]valueForKey:@"currentPlayerChosen"];
+        self.person = [[CreatePerson alloc]init];
+        [ADVThemeManager customizeView:self.person.view];
+        self.person.view.center = CGPointMake(160, 700);
+        self.person.nameField.text = [stats valueForKey:@"personName"];
+        self.person.detailsField.text = [stats valueForKey:@"personDetail"];
+        self.person.moneyField.text = [stats valueForKey:@"personPrice"];
+        [self.view addSubview:self.person.view];
+        [self.view bringSubviewToFront:self.person.view];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.person.view.center = CGPointMake(160, 190);
+        }];
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"inEditMode"];
     }
 }
 
@@ -152,16 +173,16 @@
 - (void) mainTable:(UITableView *)mainTable itemDidChange:(SDGroupCell *)item
 {
     SelectableCellState state = item.selectableCellState;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:item];
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:item];
     switch (state) {
         case Checked:
-            NSLog(@"Changed Item at indexPath:%@ to state \"Checked\"", indexPath);
+//            NSLog(@"Changed Item at indexPath:%@ to state \"Checked\"", indexPath);
             break;
         case Unchecked:
-            NSLog(@"Changed Item at indexPath:%@ to state \"Unchecked\"", indexPath);
+//            NSLog(@"Changed Item at indexPath:%@ to state \"Unchecked\"", indexPath);
             break;
         case Halfchecked:
-            NSLog(@"Changed Item at indexPath:%@ to state \"Halfchecked\"", indexPath);
+//            NSLog(@"Changed Item at indexPath:%@ to state \"Halfchecked\"", indexPath);
             break;
         default:
             break;
@@ -171,13 +192,13 @@
 - (void) mainItem:(SDGroupCell *)item subItemDidChange: (SDSelectableCell *)subItem forTap:(BOOL)tapped
 {
     SelectableCellState state = subItem.selectableCellState;
-    NSIndexPath *indexPath = [item.subTable indexPathForCell:subItem];
+//    NSIndexPath *indexPath = [item.subTable indexPathForCell:subItem];
     switch (state) {
         case Checked:
-            NSLog(@"Changed Sub Item at indexPath:%@ to state \"Checked\"", indexPath);
+//            NSLog(@"Changed Sub Item at indexPath:%@ to state \"Checked\"", indexPath);
             break;
         case Unchecked:
-            NSLog(@"Changed Sub Item at indexPath:%@ to state \"Unchecked\"", indexPath);
+//            NSLog(@"Changed Sub Item at indexPath:%@ to state \"Unchecked\"", indexPath);
             break;
         default:
             break;
@@ -186,12 +207,15 @@
 
 - (void)expandingItem:(SDGroupCell *)item withIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Expanded Item at indexPath: %@", indexPath);
+//    NSLog(@"Expanded Item at indexPath: %@", indexPath);
+    [[NSUserDefaults standardUserDefaults]setInteger:indexPath.row forKey:@"rowToInsert"];
+    NSMutableDictionary *currentPlayer = [self.groups objectAtIndex:indexPath.row];
+    [[NSUserDefaults standardUserDefaults]setValue:currentPlayer forKey:@"currentPlayerChosen"];
 }
 
 - (void)collapsingItem:(SDGroupCell *)item withIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Collapsed Item at indexPath: %@", indexPath);
+//    NSLog(@"Collapsed Item at indexPath: %@", indexPath);
 }
 
 -(IBAction)clearTable:(id)sender
@@ -216,8 +240,13 @@
         [[NSUserDefaults standardUserDefaults]setObject:self.groups forKey:@"listPeople"];
         self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
         self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
+        [UIView animateWithDuration:3.0 animations:^{
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationMiddle];
+        }completion:^(BOOL finished){
+            if (finished) {
+                [self.tableView reloadData];
+            }
+        }];
     }
 }
 

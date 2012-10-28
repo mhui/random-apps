@@ -30,4 +30,22 @@
     [super tapTransition];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    // no indent in edit mode
+    self.contentView.frame = CGRectMake(0,
+                                        self.contentView.frame.origin.y,
+                                        self.contentView.frame.size.width,
+                                        self.contentView.frame.size.height);
+    self.valueLabel.center = CGPointMake(self.valueLabel.center.x, self.valueLabel.center.y);
+    self.notifImageView.center = CGPointMake(self.notifImageView.center.x, self.notifImageView.center.y);
+}
+
+-(IBAction)editCell:(id)sender
+{
+    NSLog(@"edit the person cell");
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"editPerson" object:nil];
+}
+
 @end

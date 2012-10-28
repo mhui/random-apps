@@ -52,6 +52,9 @@
 {
     if ([[[NSUserDefaults standardUserDefaults]valueForKey:@"currentView"]isEqualToString:@"owedView"]) {
     NSMutableArray *listPeople = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
+        if ([[NSUserDefaults standardUserDefaults]boolForKey:@"inEditMode"]) {
+            [listPeople removeObject:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentPlayerChosen"]];
+        }
     NSMutableDictionary *testPerson = [[NSMutableDictionary alloc]init];
     [testPerson setValue:self.nameField.text forKey:@"personName"];
     [testPerson setValue:self.moneyField.text forKey:@"personPrice"];
@@ -64,14 +67,18 @@
     
     [formatDate setDateFormat:@"hh:mm:ss a"];
     [testPerson setValue:[formatDate stringFromDate:currentTime] forKey:@"personTime"];
-    NSLog(@"%@",[formatDate stringFromDate:currentTime]);
-    
-    
-    [listPeople addObject:testPerson];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"inEditMode"]) {
+        [listPeople insertObject:testPerson atIndex:[[NSUserDefaults standardUserDefaults]integerForKey:@"rowToInsert"]];
+    } else {
+        [listPeople addObject:testPerson];
+    }
     [[NSUserDefaults standardUserDefaults]setObject:listPeople forKey:@"listPeople"];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"doneCreating" object:nil];
     } else {
         NSMutableArray *listPeople = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+        if ([[NSUserDefaults standardUserDefaults]boolForKey:@"inEditMode"]) {
+            [listPeople removeObject:[[NSUserDefaults standardUserDefaults]valueForKey:@"currentPlayerChosen"]];
+        }
         NSMutableDictionary *testPerson = [[NSMutableDictionary alloc]init];
         [testPerson setValue:self.nameField.text forKey:@"personName"];
         [testPerson setValue:self.moneyField.text forKey:@"personPrice"];
@@ -84,19 +91,18 @@
         
         [formatDate setDateFormat:@"hh:mm:ss a"];
         [testPerson setValue:[formatDate stringFromDate:currentTime] forKey:@"personTime"];
-        NSLog(@"%@",[formatDate stringFromDate:currentTime]);
         
+        if ([[NSUserDefaults standardUserDefaults]boolForKey:@"inEditMode"]) {
+            [listPeople insertObject:testPerson atIndex:[[NSUserDefaults standardUserDefaults]integerForKey:@"rowToInsert"]];
+        } else {
+            [listPeople addObject:testPerson];
+        }
         
-        [listPeople addObject:testPerson];
         [[NSUserDefaults standardUserDefaults]setObject:listPeople forKey:@"listPeopleNext"];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"doneCreating" object:nil];
     }
 }
 
-//-(IBAction)createPerson2:(id)sender
-//{
-//    
-//}
 
 -(IBAction)cancelPerson:(id)sender
 {

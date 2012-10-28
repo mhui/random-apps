@@ -141,7 +141,10 @@
         [self.itemText setShadowOffset:CGSizeMake(0, 1)];
         [iconImageView setImage:unSelectedIconImage];
         [self.valueLabel setTextColor:[UIColor whiteColor]];
-        [self.notifImageView setImage:[UIImage imageNamed:@"notification"]];
+        UIImage *scaledImage =
+        [UIImage imageWithCGImage:[[UIImage imageNamed:@"notification.png"] CGImage]
+                            scale:2.0 orientation:UIImageOrientationUp];
+        [self.notifImageView setImage:scaledImage];
     }
 }
 
