@@ -20,6 +20,4 @@
 @property (nonatomic, strong) NSMutableArray* subGroups;
 @property (nonatomic, strong) CreatePerson* person;
 
--(IBAction)clearTable:(id)sender;
-
 @end

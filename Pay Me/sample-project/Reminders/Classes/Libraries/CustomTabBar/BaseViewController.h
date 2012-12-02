@@ -28,7 +28,7 @@
 @interface BaseViewController : UITabBarController
 {
 }
-
+@property (strong, nonatomic) UIButton *plusButton;
 // Create a view controller and setup it's tab bar item with a title and image
 -(UIViewController*) viewControllerWithTabTitle:(NSString*)title image:(UIImage*)image;
 

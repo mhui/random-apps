@@ -391,12 +391,12 @@
 
 - (UIImage *)tabBarBackground
 {
-    return [UIImage imageNamed:@"tabBarBackground"];
+    return [UIImage imageNamed:@"tabbarBackground"];
 }
 
 - (UIImage *)tabBarSelectionIndicator
 {
-    return [UIImage imageNamed:@"tabBarSelectionIndicator"];
+    return [UIImage imageNamed:@""];
 }
 
 - (UIImage *)imageForTab:(SSThemeTab)tab

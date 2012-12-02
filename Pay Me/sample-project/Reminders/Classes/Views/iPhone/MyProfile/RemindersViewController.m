@@ -36,6 +36,7 @@
 {
     [super viewDidAppear:animated];
     [[NSUserDefaults standardUserDefaults]setValue:@"owedView" forKey:@"currentView"];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -45,6 +46,14 @@
         self.person.view.center = CGPointMake(160, 700);
         [self.person.view removeFromSuperview];
     }
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"tableClearedMe"]) {
+        self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
+        self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeople"]mutableCopy];
+        [self.tableView reloadData];
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"tableClearedMe"];
+    }
+    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"buttonStatusInactive"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"buttonInactive" object:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -131,7 +140,7 @@
             self.person.view.center = CGPointMake(160, 190);
         }];
         [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"inEditMode"];
-    }
+    } 
 }
 
 

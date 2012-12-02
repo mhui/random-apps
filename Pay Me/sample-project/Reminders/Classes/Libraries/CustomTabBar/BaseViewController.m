@@ -31,6 +31,8 @@
 
 @implementation BaseViewController
 
+@synthesize plusButton = _plusButton;
+
 // Create a view controller and setup it's tab bar item with a title and image
 -(UIViewController*) viewControllerWithTabTitle:(NSString*) title image:(UIImage*)image
 {
@@ -39,17 +41,37 @@
     return viewController;
 }
 
+-(void)viewDidLoad
+{
+    NSLog(@"view did load");
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(logMessage:) name:@"buttonInactive" object:nil];
+}
+
+-(void)logMessage:(NSNotification *)notification
+{
+    UIImage *buttonImage = [UIImage imageNamed:@"buttonAdd"];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"buttonStatusInactive"]) {
+        [self.plusButton setImage:buttonImage forState:UIControlStateNormal];
+        self.plusButton.alpha = 0.3;
+    } else {
+        
+        [self.plusButton setImage:buttonImage forState:UIControlStateNormal];
+        self.plusButton.alpha = 1.0;
+    }
+}
+
 // Create a custom UIButton and add it to the center of our tab bar
 -(void) addCenterButtonWithOptions:(NSDictionary *)options {
     UIImage *buttonImage = [UIImage imageNamed:options[@"buttonImage"]];
     UIImage *highlightImage = [UIImage imageNamed:options[@"highlightImage"]];
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.plusButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton* button = self.plusButton;
     button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
-//    UITabBarItem *item = [self.tabBar.items objectAtIndex:2];
-//    item.enabled = NO;
+
     
     button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
-    [button setImage:buttonImage forState:UIControlStateNormal];
+    
     [button setImage:highlightImage forState:UIControlStateHighlighted];
     [button setContentMode:UIViewContentModeCenter];
     [button addTarget:self action:@selector(centerItemTapped) forControlEvents:UIControlEventTouchUpInside];
@@ -57,6 +79,8 @@
     CGPoint center = self.tabBar.center;
     center.y = center.y - 9.5;
     button.center = center;
+    
+    //self.plusButton = button;
         
     [self.view addSubview:button];
 }

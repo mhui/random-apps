@@ -301,7 +301,6 @@
     self.notifImageView.center = CGPointMake(290, self.notifImageView.center.y);
     self.contentView.frame = CGRectMake(0,self.contentView.frame.origin.y,460,
                                         self.contentView.frame.size.height);
-    NSLog(@"YOLO");
 }
 
 

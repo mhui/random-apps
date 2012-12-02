@@ -36,6 +36,7 @@
 {
     [super viewDidAppear:animated];
     [[NSUserDefaults standardUserDefaults]setValue:@"oweView" forKey:@"currentView"];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -45,6 +46,14 @@
         self.person.view.center = CGPointMake(160, 700);
         [self.person.view removeFromSuperview];
     }
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"tableClearedTo"]) {
+        self.groups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+        self.subGroups = [[[NSUserDefaults standardUserDefaults]objectForKey:@"listPeopleNext"]mutableCopy];
+        [self.tableView reloadData];
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"tableClearedTo"];
+    }
+    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"buttonStatusInactive"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"buttonInactive" object:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
